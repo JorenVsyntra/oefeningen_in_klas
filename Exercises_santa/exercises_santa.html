@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        // Complete this arrow function that takes a child's name and number of gifts
+        // and returns a festive message. Use template literals!
+        // Example output: "Ho ho ho! Maria has been good and gets 5 presents!"
+
+        const santaMessage = /* your code here */
+
+        // Fix the scope issues in this code so the elves can track their toy production
+        function trackToyProduction() {
+            var totalToys = 100;
+            if(true) {
+                var totalToys = 50;  // This is causing issues!
+                let dailyToys = 10;
+            }
+            console.log(totalToys);  // Should print 100, not 50
+            console.log(dailyToys);  // Should cause an error - why?
+        }
+
+        // Write an ES6 arrow function to schedule reindeer feeding times
+        // The function should take the number of reindeer and return an array of feeding times
+        const feedReindeer = /* your code here */
+
+        /* Create a comprehensive gift management system that combines:
+            1. Arrow functions for gift processing
+            2. Proper scope management with let/const
+
+            Requirements:
+            - Create an arrow function that adds gifts to a child's list
+            - Use block scope to manage different gift categories (toys, books, clothes)
+            - Handle cases where:
+            * Gift weight exceeds sleigh capacity (>25kg)
+            * Child's name is not on the nice list
+            * Invalid gift category
+        */
+
+        /* Build an elf workshop simulator that:
+            1. Uses arrow functions for each production stage
+            2. Manages scope for workshop sections
+
+            Create functions for:
+            - paintToy (arrow function)
+            - assembleToy (arrow function)
+            - qualityCheck (arrow function)
+
+            Each function should:
+            - Use block-scoped variables for tracking paint colors, parts, etc.
+            - Keep track of successful vs failed toys
+            */
+
+            /* Create a Christmas Eve delivery route optimizer that:
+            1. Uses arrow functions for calculations
+            2. Properly scopes variables for different time zones
+
+            Features to implement:
+            - Calculate optimal route between chimneys
+            - Handle timezone changes
+            - Account for weather conditions
+            - Track reindeer energy levels
+
+            Use proper scope management for:
+            - Current timezone data
+            - Weather conditions
+            - Reindeer status
+            */
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
