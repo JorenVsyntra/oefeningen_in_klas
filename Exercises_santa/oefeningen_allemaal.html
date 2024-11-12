@@ -1,5 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Previous head section remains the same -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santa's Workshop Management System</title>
+    <style>
+        /* Previous styles remain the same */
+        .code-example {
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #c41e3a;
+            font-family: monospace;
+            margin: 15px 0;
+            white-space: pre-wrap;
+        }
+        .explanation {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .interactive-demo {
+            background-color: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Previous sections remain the same -->
+
+    <!-- New Section for Scope Examples -->
+    <div class="container">
+        <div class="section">
+            <h2>Santa's Message Generator</h2>
+            <div class="input-group">
+                <label for="childNameMessage">Child's Name:</label>
+                <input type="text" id="childNameMessage" placeholder="Enter child's name">
+            </div>
+            <div class="input-group">
+                <label for="numGifts">Number of Gifts:</label>
+                <input type="number" id="numGifts" min="1" max="20" value="5">
+            </div>
+            <button onclick="generateSantaMessage()">Generate Message</button>
+            <div id="messageResult" class="results"></div>
+
+            <div class="code-example">
+// Santa's Message Generator Implementation:
+const santaMessage = (name, gifts) => 
+    `Ho ho ho! ${name} has been good and gets ${gifts} presents!`;
+            </div>
+            <div class="explanation">
+                <h3>How it works:</h3>
+                <ul>
+                    <li>Uses an arrow function for concise syntax</li>
+                    <li>Template literals allow embedded expressions with ${}</li>
+                    <li>Single line return statement for simple implementation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Toy Production Tracker</h2>
+            <div class="interactive-demo">
+                <button onclick="demonstrateScope()">Run Scope Demonstration</button>
+                <div id="scopeResult" class="results"></div>
+            </div>
+
+            <div class="code-example">
+// Original Code with Scope Issues:
+function trackToyProduction() {
+    var totalToys = 100;
+    if(true) {
+        var totalToys = 50;  // This is causing issues!
+        let dailyToys = 10;
+    }
+    console.log(totalToys);  // Prints 50 - not what we want!
+    console.log(dailyToys);  // Causes an error
+}
+
+// Fixed Code with Proper Scope:
+function trackToyProduction() {
+    let totalToys = 100;     // Using let instead of var
+    if(true) {
+        let localToys = 50;  // Separate variable with block scope
+        let dailyToys = 10;  // Properly scoped to this block
+    }
+    console.log(totalToys);  // Correctly prints 100
+    // dailyToys is not accessible here - proper block scoping
+}
+            </div>
+            
+            <div class="explanation">
+                <h3>Understanding Scope:</h3>
+                <ul>
+                    <li><strong>var</strong>: Function-scoped, can lead to unintended variable hoisting and redeclaration</li>
+                    <li><strong>let</strong>: Block-scoped, prevents accidental redeclaration and maintains proper variable isolation</li>
+                    <li><strong>const</strong>: Block-scoped, prevents reassignment, ideal for values that shouldn't change</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Previous JavaScript remains the same
+
+        // Santa Message Generator
+        const santaMessage = (name, gifts) => `Ho ho ho! ${name} has been good and gets ${gifts} presents!`;
+
+        function generateSantaMessage() {
+            const name = document.getElementById('childNameMessage').value;
+            const gifts = document.getElementById('numGifts').value;
+            const messageDiv = document.getElementById('messageResult');
+            
+            if (!name) {
+                messageDiv.innerHTML = '❌ Please enter a child\'s name';
+                messageDiv.style.color = 'red';
+                return;
+            }
+
+            const message = santaMessage(name, gifts);
+            messageDiv.innerHTML = `🎅 ${message}`;
+            messageDiv.style.color = 'green';
+        }
+
+        // Scope Demonstration
+        function demonstrateScope() {
+            const resultDiv = document.getElementById('scopeResult');
+            let output = '';
+
+            // Original problematic code demonstration
+            try {
+                var totalToys = 100;
+                if(true) {
+                    var totalToys = 50;
+                    let dailyToys = 10;
+                }
+                output += `Problem Demo:\n`;
+                output += `totalToys: ${totalToys}\n`; // Will show 50
+                output += `Trying to access dailyToys...\n`;
+            } catch (e) {
+                output += `Error: ${e.message}\n`;
+            }
+
+            // Fixed code demonstration
+            try {
+                let fixedTotalToys = 100;
+                if(true) {
+                    let localToys = 50;
+                    let dailyToys = 10;
+                }
+                output += `\nFixed Version:\n`;
+                output += `fixedTotalToys: ${fixedTotalToys}\n`; // Will show 100
+                output += `localToys and dailyToys are not accessible here (as intended)\n`;
+            } catch (e) {
+                output += `Error: ${e.message}\n`;
+            }
+
+            resultDiv.innerHTML = output.replace(/\n/g, '<br>');
+        }
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
