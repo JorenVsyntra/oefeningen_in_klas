@@ -1,0 +1,55 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "My First Post",
+      "views": 100,
+      "likes": 50,
+      "timestamp": 1618330800000
+    },
+    {
+      "id": "2",
+      "title": "Another Great Post",
+      "views": 200,
+      "likes": 75,
+      "timestamp": 1618417200000
+    },
+    {
+      "id": "3",
+      "title": "Trending Topic Post",
+      "views": 300,
+      "likes": 125,
+      "timestamp": 1618503600000
+    },
+    {
+      "id": "d207",
+      "title": "ff",
+      "views": 4,
+      "likes": 4,
+      "timestamp": 1731504960754
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "title": "Awesome post!",
+      "views": 50,
+      "likes": 20,
+      "timestamp": 1618330860000
+    },
+    {
+      "id": "2",
+      "title": "I disagree with this",
+      "views": 75,
+      "likes": 10,
+      "timestamp": 1618417260000
+    },
+    {
+      "title": "Trending Topic Post",
+      "views": 300,
+      "likes": 125,
+      "timestamp": 1731504571396,
+      "id": "3"
+    }
+  ]
+}

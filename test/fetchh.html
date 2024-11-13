@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post and Comment Manager</title>
+    <link rel="stylesheet" href="fetchh.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Post and Comment Manager</h1>
+        <div class="form-choice">
+            <button onclick="showPostForm()" class="btn btn-primary">Add a Post</button>
+            <button onclick="showCommentForm()" class="btn btn-primary">Add a Comment</button>
+        </div>
+        <div class="post-form hidden">
+            <h2>Add a Post</h2>
+            <input type="text" id="post-title" placeholder="Enter post title">
+            <div class="number-inputs">
+                <input type="number" id="post-views" placeholder="Views">
+                <input type="number" id="post-likes" placeholder="Likes">
+            </div>
+            <button onclick="addPost()" class="btn btn-primary">Add Post</button>
+        </div>
+        <div class="comment-form hidden">
+            <h2>Add a Comment</h2>
+            <input type="text" id="comment-title" placeholder="Enter comment">
+            <div class="number-inputs">
+                <input type="number" id="comment-views" placeholder="Views">
+                <input type="number" id="comment-likes" placeholder="Likes">
+            </div>
+            <button onclick="addComment()" class="btn btn-primary">Add Comment</button>
+        </div>
+        <div id="output"></div>
+    </div>
+
+    <script src="fetchh.js"></script>
+</body>
+</html>

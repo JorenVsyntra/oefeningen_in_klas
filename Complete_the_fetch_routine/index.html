@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post and Comment Manager</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container mx-auto py-8">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold">Post and Comment Manager</h1>
+      <div class="space-x-4">
+        <button id="add-post" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Add Post
+        </button>
+        <button id="add-comment" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+          Add Comment
+        </button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="post-list">
+        <h2 class="text-xl font-bold mb-4">Posts</h2>
+        <div id="posts-output"></div>
+      </div>
+      <div class="comment-list">
+        <h2 class="text-xl font-bold mb-4">Comments</h2>
+        <div id="comments-output"></div>
+      </div>
+    </div>
+
+    <!-- Modal for adding/editing posts and comments -->
+    <div id="modal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+      <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+          <h2 id="modal-title" class="text-xl font-bold mb-4"></h2>
+          <form id="modal-form">
+            <div class="mb-4">
+              <label for="title" class="block font-bold mb-2">Title</label>
+              <input type="text" id="title" class="border rounded px-3 py-2 w-full" required>
+            </div>
+            <div class="mb-4">
+              <label for="views" class="block font-bold mb-2">Views</label>
+              <input type="number" id="views" class="border rounded px-3 py-2 w-full" required>
+            </div>
+            <div class="mb-4">
+              <label for="likes" class="block font-bold mb-2">Likes</label>
+              <input type="number" id="likes" class="border rounded px-3 py-2 w-full" required>
+            </div>
+            <div class="flex justify-end">
+              <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Save
+              </button>
+              <button type="button" id="modal-close" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </div>
+</body>
+</html>
