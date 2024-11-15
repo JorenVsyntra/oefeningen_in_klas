@@ -1,33 +1,50 @@
 {
-    "posts": [
+  "kids": [
     {
       "id": "2d22",
-      "title": "Joren V",
-      "timestamp": 1731672177452
+      "name": "Joren V",
+      "timestamp": 1731672177452,
+      "gifts": []
     },
     {
-      "id": "2fc1",
-      "title": "Jordy H",
-      "timestamp": 1731672187782
+      "name": "Jordy H",
+      "gifts": [
+        "1",
+        "3"
+      ],
+      "timestamp": 1731682241223,
+      "id": "2fc1"
     },
     {
-      "id": "d3d9",
-      "title": "Bassy D",
-      "timestamp": 1731672199267
+      "name": "Bassy Dol",
+      "gifts": [
+        "1",
+        "3"
+      ],
+      "timestamp": 1731681483749,
+      "id": "d3d9"
+    },
+    {
+      "name": "Rafa",
+      "gifts": [
+        "2"
+      ],
+      "timestamp": 1731681230701,
+      "id": "4664"
     }
-  ], 
-  "toys": [
+  ],
+  "gifts": [
     {
       "id": "1",
-      "toyName": "Barbie"
+      "name": "Pop"
     },
     {
-        "id": "2",
-        "toyName": "Boek"
+      "id": "2",
+      "name": "Boek"
     },
     {
-        "id": "3",
-        "toyName": "Lego"
+      "id": "3",
+      "name": "Lego"
     }
-  ]   
+  ]
 }
