@@ -34,6 +34,19 @@ function loadSavedPosts() {
     }
 }
 
+//Fetch toy data
+function fetchToyData() {
+    giftList.innerHTML = '';
+    fetch (giftsUrl)
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(gift => {
+            giftList.innerHTML += `<li>${gift.name}</li>`
+        });
+    })
+    .catch(error => console.error(error));
+}
+
 // Fetch kids and their associated gifts
 async function fetchdata() {
     output.innerHTML = '';
@@ -142,3 +155,4 @@ function saveEdit(id) {
 // Initial load
 fetchdata();
 loadSavedPosts();
+fetchToyData();
