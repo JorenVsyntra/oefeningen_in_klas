@@ -1,4 +1,5 @@
-const url = 'http://localhost:3000/posts';
+const kidsUrl = 'http://localhost:3000/kids';
+const giftsUrl = 'http://localhost:3000/gifts';
 const output = document.getElementById('output');
 const savedOutput = document.getElementById('savedOutput');
 
@@ -22,7 +23,7 @@ function loadSavedPosts() {
             const postDiv = document.createElement('div');
             postDiv.className = 'post-item';
             postDiv.innerHTML = `
-                <span>${post.title} (${post.views}) (${post.likes || 0})</span>
+                <span>${post.name}</span>
                 <button onclick="removeFromSaved('${post.id}')">Remove</button>
             `;
             savedOutput.appendChild(postDiv);
@@ -33,162 +34,111 @@ function loadSavedPosts() {
     }
 }
 
-// Save post to localStorage
-function saveToLocal(postId, postTitle, postViews, postLikes, timestamp) {
-    try {
-        const post = {
-            id: postId,  // postId is received as a string
-            title: postTitle,
-            views: postViews,
-            likes: postLikes || 0,
-            timestamp: timestamp
-        };
-        
-        const savedPosts = JSON.parse(localStorage.getItem('savedPosts') || '[]');
-        
-        if (!savedPosts.some(p => p.id === post.id)) {  // Comparing strings with strings
-            savedPosts.push(post);
-            localStorage.setItem('savedPosts', JSON.stringify(savedPosts));
-            loadSavedPosts();
-        } else {
-            alert('This post is already saved!');
-        }
-    } catch (error) {
-        console.error('Error saving post:', error);
-    }
+//Fetch toy data
+function fetchToyData() {
+    giftList.innerHTML = '';
+    fetch (giftsUrl)
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(gift => {
+            giftList.innerHTML += `<li>${gift.name}</li>`
+        });
+    })
+    .catch(error => console.error(error));
 }
 
-// Remove post from saved posts
-function removeFromSaved(postId) {
-    try {
-        const savedPosts = JSON.parse(localStorage.getItem('savedPosts') || '[]');
-        // Convert postId to string for consistent comparison
-        const postIdString = String(postId);
-        const updatedPosts = savedPosts.filter(post => post.id !== postIdString);
-        localStorage.setItem('savedPosts', JSON.stringify(updatedPosts));
-        loadSavedPosts();
-    } catch (error) {
-        console.error('Error removing saved post:', error);
-    }
-}
-
-function fetchdata() {
+// Fetch kids and their associated gifts
+async function fetchdata() {
     output.innerHTML = '';
-    fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            if (data.length === 0) {
-                const noPostsMessage = document.createElement('div');
-                noPostsMessage.className = 'no-posts-message';
-                noPostsMessage.textContent = 'No posts available. Add your first post!';
-                output.appendChild(noPostsMessage);
-                return;
-            }
-            
-            // Sort posts by timestamp in descending order
-            const sortedData = data.sort((a, b) => b.timestamp - a.timestamp);
-            sortedData.forEach(post => {
-                output.innerHTML += `
-                    <div class="post-item" id="post-${post.id}">
-                        <span class="post-content">${post.title} (${post.views}) (${post.likes || 0})</span>
-                        <div class="edit-form" style="display: none;">
-                            <input type="text" class="edit-title" value="${post.title}">
-                            <input type="number" class="edit-views" value="${post.views}">
-                            <input type="number" class="edit-likes" value="${post.likes || 0}">
-                            <button class="smallbutton" onclick="saveEdit('${post.id}')">S</button>
-                            <button class="smallbutton" onclick="cancelEdit('${post.id}')">X</button>
-                        </div>
-                        <div class="button-group">
-                            <button onclick="editPost('${post.id}')">Edit</button>
-                            <button onclick="saveToLocal('${post.id}', '${post.title}', ${post.views}, ${post.likes || 0}, ${post.timestamp})">Save</button>
-                            <button onclick="deletePost('${post.id}')">Delete</button>
-                        </div>
-                    </div>
-                `;
+    try {
+        const kidsResponse = await fetch(kidsUrl);
+        const kidsData = await kidsResponse.json();
+
+        const giftsResponse = await fetch(giftsUrl);
+        const giftsData = await giftsResponse.json();
+
+        if (kidsData.length === 0) {
+            const noPostsMessage = document.createElement('div');
+            noPostsMessage.className = 'no-posts-message';
+            noPostsMessage.textContent = 'No kids available. Add your first kid!';
+            output.appendChild(noPostsMessage);
+            return;
+        }
+        
+        // Sort kids by timestamp in descending order
+        const sortedKids = kidsData.sort((a, b) => b.timestamp - a.timestamp);
+        
+        sortedKids.forEach(kid => {
+            // Filter gifts associated with the current kid by kid's id
+            const kidGifts = giftsData.filter(gift => gift.kidId === kid.id);
+
+            // Generate HTML for each kid with their associated gifts
+            let giftsHTML = '<ul>';
+            kidGifts.forEach(gift => {
+                giftsHTML += `<li>${gift.name}</li>`;
             });
-        })
-        .catch(e => console.error('Error fetching posts:', e));
-}
+            giftsHTML += '</ul>';
 
-// Add new post
-document.getElementById('addPostButton').addEventListener('click', () => {
-    const newPost = {
-        title: document.getElementById('title').value,
-        views: parseInt(document.getElementById('views').value),
-        likes: parseInt(document.getElementById('likes').value) || 0,
-        timestamp: Date.now() // Add timestamp when creating new post
-    };
-    
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newPost)
-    })
-    .then(res => res.json())
-    .then(() => {
-        fetchdata();
-        document.getElementById('title').value = '';
-        document.getElementById('views').value = '';
-        document.getElementById('likes').value = '';
-    })
-    .catch(e => console.error('Error adding post:', e));
-});
-
-// Delete post
-function deletePost(id) {
-    fetch(`${url}/${id}`, {
-        method: 'DELETE'
-    })
-    .then(() => fetchdata())
-    .catch(e => console.error('Error deleting post:', e));
-}
-
-// Clear localStorage
-document.getElementById('clearStorage').addEventListener('click', () => {
-    if (confirm('Are you sure you want to clear all saved posts?')) {
-        localStorage.removeItem('savedPosts');
-        loadSavedPosts();
+            output.innerHTML += `
+                <div class="post-item" id="post-${kid.id}">
+                    <span class="post-content">${kid.name} - Gifts: ${kid.gifts} </span>
+                    ${giftsHTML}
+                    <div class="edit-form" style="display: none;">
+                        <input type="text" class="edit-kidName" value="${kid.name}">
+                        <div class="edit-gifts">
+                            <label for="giftsDropdown-${kid.id}">Select Gifts:</label>
+                            <select id="giftsDropdown-${kid.id}" multiple>
+                                ${giftsData.map(gift => `<option value="${gift.id}">${gift.name}</option>`).join('')}
+                            </select>
+                        </div>
+                        <button class="smallbutton" onclick="saveEdit('${kid.id}')">S</button>
+                        <button class="smallbutton" onclick="cancelEdit('${kid.id}')">X</button>
+                    </div>
+                    <div class="button-group">
+                        <button onclick="editPost('${kid.id}')">Edit</button>
+                        <button onclick="saveToLocal('${kid.id}', '${kid.name}')">Save</button>
+                        <button onclick="deletePost('${kid.id}')">Delete</button>
+                    </div>
+                </div>
+            `;
+        });
+    } catch (e) {
+        console.error('Error fetching data:', e);
     }
-});
+}
 
-// Refresh button - anyways; absolute refresh bruh ;)
-document.getElementById('clear').addEventListener('click', fetchdata);
-
+// Show the edit form and populate the gifts dropdown for a kid
 function editPost(id) {
-    // Show edit form and hide content for the selected post
     const postDiv = document.getElementById(`post-${id}`);
     postDiv.querySelector('.post-content').style.display = 'none';
     postDiv.querySelector('.edit-form').style.display = 'block';
     postDiv.querySelector('.button-group').style.display = 'none';
 }
 
+// Cancel editing
 function cancelEdit(id) {
-    // Hide edit form and show content
     const postDiv = document.getElementById(`post-${id}`);
     postDiv.querySelector('.post-content').style.display = 'block';
     postDiv.querySelector('.edit-form').style.display = 'none';
     postDiv.querySelector('.button-group').style.display = 'block';
 }
 
+// Save the updated kid data, including selected gifts
 function saveEdit(id) {
-    // Get the edited values
     const postDiv = document.getElementById(`post-${id}`);
-    const newTitle = postDiv.querySelector('.edit-title').value;
-    const newViews = parseInt(postDiv.querySelector('.edit-views').value);
-    const newLikes = parseInt(postDiv.querySelector('.edit-likes').value);
+    const newKidName = postDiv.querySelector('.edit-kidName').value;
+    const selectedGiftIds = Array.from(postDiv.querySelector(`#giftsDropdown-${id}`).selectedOptions)
+                                  .map(option => option.value);
 
-    // Create updated post object
+    // Create updated post object with new name and selected gifts
     const updatedPost = {
-        title: newTitle,
-        views: newViews,
-        likes: newLikes,
+        name: newKidName,
+        gifts: selectedGiftIds, // Associate selected gift IDs
         timestamp: Date.now() // Update timestamp
     };
 
     // Send PUT request to update the post
-    fetch(`${url}/${id}`, {
+    fetch(`${kidsUrl}/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -197,8 +147,7 @@ function saveEdit(id) {
     })
     .then(res => res.json())
     .then(() => {
-        // Refresh the posts display
-        fetchdata();
+        fetchdata(); // Refresh the posts display
     })
     .catch(e => console.error('Error updating post:', e));
 }
@@ -206,3 +155,4 @@ function saveEdit(id) {
 // Initial load
 fetchdata();
 loadSavedPosts();
+fetchToyData();
