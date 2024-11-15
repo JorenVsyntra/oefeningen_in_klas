@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Posts Manager</title>
+    <link rel="stylesheet" href="fetchcrude.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Posts Manager</h1>
+        
+        <!-- Add Post Form -->
+        <div class="input-group">
+            <input type="text" id="title" placeholder="Title" required>
+            <input type="number" id="views" placeholder="Views" required>
+            <input type="number" id="likes" placeholder="Likes">
+            <button id="addPostButton">Add Post</button>
+        </div>
+        
+        <div class="button-group">
+            <button id="clear">Refresh Posts</button>
+            <button id="clearStorage">Clear Saved Posts</button>
+        </div>
+        
+        <div id="output"></div>
+        
+        <!-- Saved Posts Section -->
+        <div class="saved-posts">
+            <h2>Saved Localstorage Posts</h2>
+            <div id="savedOutput"></div>
+        </div>
+    </div>
+
+    <script src="fetchcrude.js"></script>
+</body>
+</html>
