@@ -7,7 +7,7 @@
 
 body {
     min-height: 100vh;
-    background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+    background: linear-gradient(135deg, #b80000, #810000, #000000);
     padding: 2rem;
     color: #fff;
 }
@@ -24,6 +24,7 @@ h1 {
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 
 /* Glassmorphism Base Styles */
 .glass-effect {
@@ -150,6 +151,73 @@ button.smallbutton {
     height: 36px;
     font-size: xx-small;
 }
+
+
+
+        body {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        
+        .content {
+            flex: 1;
+        }
+        
+        .christmaslist {
+            width: 300px; /* Set a fixed width for the list */
+            background-color: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-left: 10px; /* Space between content and list */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: right;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            height: auto;
+            }
+            
+            .title {
+                display: block;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 0.4rem;
+                margin-top: 0.1rem;
+                font-size: 1.2rem;
+                font-weight: 600;
+
+            }
+
+            .item {
+                margin-bottom: 1rem;
+                width: 100%;
+                font-size: 1.05rem;
+                font-weight: 600;
+            }
+            
+            .subitem{
+                margin-left: 20px;
+                font-size: 0.8rem;
+                font-weight: 350;
+            }
+            
+            .christmaslist:hover {
+                background: rgba(255, 255, 255, 0.15);
+                transform: translateY(-5px);
+            }
+
+
+
+     
+            
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
