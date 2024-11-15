@@ -1,1 +1,33 @@
-{}
+{
+    "posts": [
+    {
+      "id": "2d22",
+      "title": "Joren V",
+      "timestamp": 1731672177452
+    },
+    {
+      "id": "2fc1",
+      "title": "Jordy H",
+      "timestamp": 1731672187782
+    },
+    {
+      "id": "d3d9",
+      "title": "Bassy D",
+      "timestamp": 1731672199267
+    }
+  ], 
+  "toys": [
+    {
+      "id": "1",
+      "toyName": "Barbie"
+    },
+    {
+        "id": "2",
+        "toyName": "Boek"
+    },
+    {
+        "id": "3",
+        "toyName": "Lego"
+    }
+  ]   
+}
