@@ -1,7 +1,4 @@
 {
-<<<<<<< HEAD
-  "kids": [],
-=======
   "kids": [
     {
       "id": "2d22",
@@ -12,14 +9,10 @@
     {
       "id": "a6e4",
       "name": "Zoe",
-      "gifts": [
-        "Book",
-        "Car"
-      ],
+      "gifts": [],
       "timestamp": 1732006290626
     }
   ],
->>>>>>> db4b6f2 (javascript werking)
   "gifts": [
     {
       "id": "1",
