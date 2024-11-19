@@ -1,11 +1,5 @@
 {
   "kids": [
-    {
-      "id": "6d75",
-      "name": "Laure",
-      "gifts": [],
-      "timestamp": 1732032199136
-    }
   ],
   "gifts": [
     {
@@ -27,10 +21,6 @@
     {
       "id": "5",
       "name": "Playstation"
-    },
-    {
-      "id": "099b",
-      "name": "gsm"
     }
   ]
 }
