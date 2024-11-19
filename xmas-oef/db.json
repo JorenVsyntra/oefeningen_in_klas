@@ -1,5 +1,12 @@
 {
-  "kids": [],
+  "kids": [
+    {
+      "id": "e1a8",
+      "name": "Joren",
+      "gifts": [],
+      "timestamp": 1732023011289
+    }
+  ],
   "gifts": [
     {
       "id": "1",

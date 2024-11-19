@@ -252,3 +252,24 @@ height: auto;
 .marginTop {
     margin-top: 2rem;
 }
+
+button.xsmallbutton {
+    width: 20px;
+    height: 20px;
+    font-size: xx-small;
+    text-align: center;
+    padding: 0px;
+    margin: 0px 2px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0px 2px;
+    }
+    
+    button.xsmallbutton:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+        }
+

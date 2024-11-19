@@ -209,7 +209,7 @@ function removeFromSaved(postId) {
 }
 
 function fetchGiftsData() {
-    output2.innerHTML = '';
+    giftOutput.innerHTML = '';
     fetch(giftsUrl)
         .then(res => res.json())
         .then(giftsData => {
@@ -224,14 +224,44 @@ function fetchGiftsData() {
         // Sort kids by timestamp in descending order
         const sortedKids = giftsData.sort((a, b) => b.timestamp - a.timestamp);
         sortedKids.forEach(gifts => {
-            output2.innerHTML += `
+            giftOutput.innerHTML += `
                 <div class="post-item" id="post-${gifts.id}">
                     <span class="post-content">${gifts.name} </span>
+                    <div class="button-group">
+                        <button class="xsmallbutton" onclick="deleteGift('${gifts.id}')">X</button>
+                    </div>
                 </div>
             `;
         });
     }) 
     .catch(e => console.error('Error fetching posts:', e));
+}
+
+// Add a toy name to the list
+document.getElementById('addGiftButton').addEventListener('click', () => {
+    const newGift = {
+        name: document.getElementById('giftName').value,
+    }
+    fetch(giftsUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newGift)
+    })
+    .then(() => {
+        fetchGiftsData();
+        document.getElementById('giftName').value = '';
+    })
+    .catch(e => console.error('Error adding post:', e))
+});
+
+function deleteGift(id) {
+    fetch(`${giftsUrl}/${id}`, {
+        method: 'DELETE'
+    })
+    .then(() => fetchGiftsData())
+    .catch(e => console.error('Error deleting post:', e));
 }
 
 // Initial load
