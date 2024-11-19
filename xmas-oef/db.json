@@ -1,5 +1,25 @@
 {
+<<<<<<< HEAD
   "kids": [],
+=======
+  "kids": [
+    {
+      "id": "2d22",
+      "name": "Joren V",
+      "timestamp": 1731672177452,
+      "gifts": []
+    },
+    {
+      "id": "a6e4",
+      "name": "Zoe",
+      "gifts": [
+        "Book",
+        "Car"
+      ],
+      "timestamp": 1732006290626
+    }
+  ],
+>>>>>>> db4b6f2 (javascript werking)
   "gifts": [
     {
       "id": "1",

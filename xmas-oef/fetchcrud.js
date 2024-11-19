@@ -27,8 +27,11 @@ function fetchKidsData() {
                         <input type="checkbox" class="bookCheck" style="margin-left: 10px;"> Book
                         <input type="checkbox" class="dollCheck" style="margin-left: 10px;"> Doll
                         <input type="checkbox" class="carCheck" style="margin-left: 10px;"> Car
+<<<<<<< HEAD:xmas-oef/fetchcrud.js
                         <input type="checkbox" class="legoCheck" style="margin-left: 10px;"> Lego
                         <input type="checkbox" class="psCheck" style="margin-left: 10px;"> Playstation
+=======
+>>>>>>> db4b6f2 (javascript werking):xmas-oef/fetchcrude.js
                         <button class="smallbutton" onclick="saveEdit('${kid.id}')" style="margin-left: 20px;">Save</button>
                         <button class="smallbutton" onclick="cancelEdit('${kid.id}')">Cancel</button>
                     </div>
@@ -92,9 +95,13 @@ function editPost(id) {
             let giftsArray = [];
             let addBook = postDiv.querySelector('.bookCheck').checked ? giftsArray.push('Book') : null;
             let addDoll = postDiv.querySelector('.dollCheck').checked ? giftsArray.push('Doll') : null;
+<<<<<<< HEAD:xmas-oef/fetchcrud.js
             let addCar = postDiv.querySelector('.carCheck').checked ? giftsArray.push('Toycar') : null;
             let addLego = postDiv.querySelector('.legoCheck').checked ? giftsArray.push('Lego') : null;
             let addPS = postDiv.querySelector('.psCheck').checked ? giftsArray.push('Playstation') : null;
+=======
+            let addCar = postDiv.querySelector('.carCheck').checked ? giftsArray.push('Car') : null;
+>>>>>>> db4b6f2 (javascript werking):xmas-oef/fetchcrude.js
 
             // Create updated post object
             const updatedPost = {
