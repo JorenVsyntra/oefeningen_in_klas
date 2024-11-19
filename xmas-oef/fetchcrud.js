@@ -5,6 +5,7 @@ const savedOutput = document.getElementById('savedOutput');
 
 function fetchKidsData() {
     output.innerHTML = '';
+
     fetch(kidsUrl)
         .then(res => res.json())
         .then(kidsData => {
@@ -15,33 +16,42 @@ function fetchKidsData() {
                 output.appendChild(noPostsMessage);
                 return;
             }
-        
-        // Sort kids by timestamp in descending order
-        const sortedKids = kidsData.sort((a, b) => b.timestamp - a.timestamp);
-        sortedKids.forEach(kid => {
-            output.innerHTML += `
-                <div class="post-item" id="post-${kid.id}">
-                    <span class="post-content">${kid.name} - Gifts: ${kid.gifts} </span>
-                    <div class="edit-form" style="display: none;">
-                        <span>${kid.name}</span>
-                        <input type="checkbox" class="bookCheck" style="margin-left: 10px;"> Book
-                        <input type="checkbox" class="dollCheck" style="margin-left: 10px;"> Doll
-                        <input type="checkbox" class="carCheck" style="margin-left: 10px;"> Car
-                        <input type="checkbox" class="legoCheck" style="margin-left: 10px;"> Lego
-                        <input type="checkbox" class="psCheck" style="margin-left: 10px;"> Playstation
-                        <button class="smallbutton" onclick="saveEdit('${kid.id}')" style="margin-left: 20px;">Save</button>
-                        <button class="smallbutton" onclick="cancelEdit('${kid.id}')">Cancel</button>
-                    </div>
-                    <div class="button-group">
-                        <button onclick="editPost('${kid.id}')">Edit</button>
-                        <button onclick="saveToLocal('${kid.id}', '${kid.name}', '${kid.gifts}')">Save</button>
-                        <button onclick="deletePost('${kid.id}')">Delete</button>
-                    </div>
-                </div>
-            `;
-        });
-    }) 
-    .catch(e => console.error('Error fetching posts:', e));
+
+            // Fetch gifts data
+            fetch(giftsUrl)
+                .then(giftsResponse => giftsResponse.json())
+                .then(giftsData => {
+                    // Sort kids by timestamp in descending order
+                    const sortedKids = kidsData.sort((a, b) => b.timestamp - a.timestamp);
+
+                    sortedKids.forEach(kid => {
+                        // Generate dropdown options for each gift
+                        const giftOptions = giftsData.map(gift => `<option value="${gift.id}">${gift.name}</option>`).join('');
+
+                        output.innerHTML += `
+                            <div class="post-item" id="post-${kid.id}">
+                                <span class="post-content">${kid.name} - Gifts: ${kid.gifts} </span>
+                                <div class="edit-form" style="display: none;">
+                                    <span>${kid.name}</span>
+                                    <label for="giftsDropdown-${kid.id}"> - Select Gifts: </label>
+                                    <select id="giftsDropdown-${kid.id}" multiple>
+                                        ${giftOptions}
+                                    </select>
+                                    <button class="smallbutton" onclick="saveEdit('${kid.id}')" style="margin-left: 20px;">Save</button>
+                                    <button class="smallbutton" onclick="cancelEdit('${kid.id}')">Cancel</button>
+                                </div>
+                                <div class="button-group">
+                                    <button onclick="editPost('${kid.id}')">Edit</button>
+                                    <button onclick="saveToLocal('${kid.id}', '${kid.name}', '${kid.gifts}')">Save</button>
+                                    <button onclick="deletePost('${kid.id}')">Delete</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                })
+                .catch(e => console.error('Error fetching gifts:', e));
+        })
+        .catch(e => console.error('Error fetching kids:', e));
 }
 
 // Add a child name to the list
@@ -89,19 +99,17 @@ function editPost(id) {
         function saveEdit(id) {
             // Get the edited values
             const postDiv = document.getElementById(`post-${id}`);
-            let giftsArray = [];
-            let addBook = postDiv.querySelector('.bookCheck').checked ? giftsArray.push('Book') : null;
-            let addDoll = postDiv.querySelector('.dollCheck').checked ? giftsArray.push('Doll') : null;
-            let addCar = postDiv.querySelector('.carCheck').checked ? giftsArray.push('Toycar') : null;
-            let addLego = postDiv.querySelector('.legoCheck').checked ? giftsArray.push('Lego') : null;
-            let addPS = postDiv.querySelector('.psCheck').checked ? giftsArray.push('Playstation') : null;
-
+            const giftsDropdown = postDiv.querySelector(`#giftsDropdown-${id}`);
+        
+            // Collect selected options from the dropdown
+            const selectedGifts = Array.from(giftsDropdown.selectedOptions).map(option => option.text);
+        
             // Create updated post object
             const updatedPost = {
-                gifts: giftsArray
+                gifts: selectedGifts
             };
-
-            // Send PUT request to update the post
+        
+            // Send PATCH request to update the post
             fetch(`${kidsUrl}/${id}`, {
                 method: 'PATCH',
                 headers: {
@@ -143,7 +151,6 @@ function saveToLocal(postId, postName, postGifts, timestamp) {
             localStorage.setItem('savedPosts', JSON.stringify(savedPosts));
             loadSavedPosts();
             deletePost(post.id);
-            fetchKidsData();
         } else {
             alert("This child's gifts are already saved!");
         }
@@ -251,6 +258,7 @@ document.getElementById('addGiftButton').addEventListener('click', () => {
     })
     .then(() => {
         fetchGiftsData();
+        fetchKidsData();
         document.getElementById('giftName').value = '';
     })
     .catch(e => console.error('Error adding post:', e))
@@ -260,7 +268,10 @@ function deleteGift(id) {
     fetch(`${giftsUrl}/${id}`, {
         method: 'DELETE'
     })
-    .then(() => fetchGiftsData())
+    .then(() => {
+        fetchGiftsData();
+        fetchKidsData();
+    })
     .catch(e => console.error('Error deleting post:', e));
 }
 
