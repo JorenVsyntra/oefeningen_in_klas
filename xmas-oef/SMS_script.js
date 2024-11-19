@@ -27,6 +27,8 @@ function fetchKidsData() {
                         <input type="checkbox" class="bookCheck" style="margin-left: 10px;"> Book
                         <input type="checkbox" class="dollCheck" style="margin-left: 10px;"> Doll
                         <input type="checkbox" class="carCheck" style="margin-left: 10px;"> Car
+                        <input type="checkbox" class="legoCheck" style="margin-left: 10px;"> Lego
+                        <input type="checkbox" class="psCheck" style="margin-left: 10px;"> Playstation
                         <button class="smallbutton" onclick="saveEdit('${kid.id}')" style="margin-left: 20px;">Save</button>
                         <button class="smallbutton" onclick="cancelEdit('${kid.id}')">Cancel</button>
                     </div>
@@ -87,7 +89,9 @@ function editPost(id) {
             let giftsArray = [];
             let addBook = postDiv.querySelector('.bookCheck').checked ? giftsArray.push('Book') : null;
             let addDoll = postDiv.querySelector('.dollCheck').checked ? giftsArray.push('Doll') : null;
-            let addCar = postDiv.querySelector('.carCheck').checked ? giftsArray.push('Car') : null;
+            let addCar = postDiv.querySelector('.carCheck').checked ? giftsArray.push('Toycar') : null;
+            let addLego = postDiv.querySelector('.legoCheck').checked ? giftsArray.push('Lego') : null;
+            let addPS = postDiv.querySelector('.psCheck').checked ? giftsArray.push('Playstation') : null;
 
             // Create updated post object
             const updatedPost = {
@@ -197,6 +201,33 @@ function removeFromSaved(postId) {
     }
 }
 
+function fetchGiftsData() {
+    output2.innerHTML = '';
+    fetch(giftsUrl)
+        .then(res => res.json())
+        .then(giftsData => {
+            if (giftsData.length === 0) {
+                const noPostsMessage = document.createElement('div');
+                noPostsMessage.className = 'no-posts-message';
+                noPostsMessage.textContent = 'No posts available. Add your first post!';
+                output.appendChild(noPostsMessage);
+                return;
+            }
+        
+        // Sort kids by timestamp in descending order
+        const sortedKids = giftsData.sort((a, b) => b.timestamp - a.timestamp);
+        sortedKids.forEach(gifts => {
+            output2.innerHTML += `
+                <div class="post-item" id="post-${gifts.id}">
+                    <span class="post-content">${gifts.name} </span>
+                </div>
+            `;
+        });
+    }) 
+    .catch(e => console.error('Error fetching posts:', e));
+}
+
 // Initial load
 fetchKidsData();
 loadSavedPosts();
+fetchGiftsData();

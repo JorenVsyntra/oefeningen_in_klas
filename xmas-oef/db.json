@@ -4,30 +4,59 @@
       "id": "2d22",
       "name": "Joren V",
       "timestamp": 1731672177452,
-      "gifts": []
+      "gifts": [
+        "Book",
+        "Toycar",
+        "Lego",
+        "Playstation"
+      ]
     },
     {
       "id": "a6e4",
       "name": "Zoe",
       "gifts": [
+        "Doll"
+      ],
+      "timestamp": 1732006290626
+    },
+    {
+      "id": "1da5",
+      "name": "Jordy",
+      "gifts": [
         "Book",
         "Car"
       ],
-      "timestamp": 1732006290626
+      "timestamp": 1732007764968
+    },
+    {
+      "id": "5800",
+      "name": "Baziel",
+      "gifts": [
+        "Lego"
+      ],
+      "timestamp": 1732008868724
     }
   ],
   "gifts": [
     {
       "id": "1",
-      "name": "Pop"
+      "name": "Book"
     },
     {
       "id": "2",
-      "name": "Boek"
+      "name": "Doll"
     },
     {
       "id": "3",
+      "name": "Car"
+    },
+    {
+      "id": "4",
       "name": "Lego"
+    },
+    {
+      "id": "5",
+      "name": "Playstation"
     }
   ]
 }
