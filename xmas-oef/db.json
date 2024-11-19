@@ -1,16 +1,5 @@
 {
-  "kids": [
-    {
-      "id": "2c85",
-      "name": "Bassie",
-      "gifts": [
-        "Toycar",
-        "Lego",
-        "Playstation"
-      ],
-      "timestamp": 1732020303585
-    }
-  ],
+  "kids": [],
   "gifts": [
     {
       "id": "1",

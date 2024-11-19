@@ -70,7 +70,7 @@ document.getElementById('clear').addEventListener('click', fetchKidsData);
 
 // Clear localStorage
 document.getElementById('clearStorage').addEventListener('click', () => {
-    if (confirm('Are you sure you want to clear all saved posts?')) {
+    if (confirm('Are you sure you want to clear the magic sleighbag?')) {
         localStorage.removeItem('savedPosts');
         loadSavedPosts();
     }
