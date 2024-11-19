@@ -135,6 +135,7 @@ h2 {
 .button-group {
     display: flex;
     gap: 0.5rem;
+    margin-left: 1rem;
 }
 
 /* Output area */

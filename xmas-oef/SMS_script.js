@@ -58,7 +58,10 @@ document.getElementById('addPostButton').addEventListener('click', () => {
         },
         body: JSON.stringify(newPost)
     })
-    .then(() => fetchKidsData())
+    .then(() => {
+        fetchKidsData();
+        document.getElementById('kidName').value = '';
+    })
     .catch(e => console.error('Error adding post:', e))
 });
 
@@ -139,6 +142,8 @@ function saveToLocal(postId, postName, postGifts, timestamp) {
             savedPosts.push(post);
             localStorage.setItem('savedPosts', JSON.stringify(savedPosts));
             loadSavedPosts();
+            deletePost(post.id);
+            fetchKidsData();
         } else {
             alert("This child's gifts are already saved!");
         }
@@ -177,7 +182,9 @@ function loadSavedPosts() {
             postDiv.className = 'post-item';
             postDiv.innerHTML = `
                 <span>${post.name} - Gifts: ${post.gifts}</span>
-                <button onclick="removeFromSaved('${post.id}')">Remove</button>
+                <div class="button-group">
+                    <button onclick="removeFromSaved('${post.id}')">Remove</button>
+                </div>
             `;
             savedOutput.appendChild(postDiv);
         });
