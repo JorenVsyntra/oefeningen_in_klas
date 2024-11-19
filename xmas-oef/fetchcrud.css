@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Mountains+of+Christmas:wght@400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -20,6 +22,7 @@ body {
 }
 
 h1 {
+    font-family: "Mountains of Christmas", serif;
     text-align: center;
     margin-bottom: 2rem;
     font-size: 2.5rem;
@@ -108,6 +111,7 @@ button:hover {
 h2 {
     margin-bottom: 1.5rem;
     font-weight: 600;
+    font-family: "Mountains of Christmas", serif;
 }
 
 .post-item {
@@ -131,6 +135,7 @@ h2 {
 .button-group {
     display: flex;
     gap: 0.5rem;
+    margin-left: 1rem;
 }
 
 /* Output area */
@@ -222,4 +227,8 @@ height: auto;
         gap: 1rem;
         text-align: center;
     }
+}
+
+.marginTop {
+    margin-top: 2rem;
 }

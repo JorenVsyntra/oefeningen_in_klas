@@ -11,7 +11,7 @@ function fetchKidsData() {
             if (kidsData.length === 0) {
                 const noPostsMessage = document.createElement('div');
                 noPostsMessage.className = 'no-posts-message';
-                noPostsMessage.textContent = 'No posts available. Add your first post!';
+                noPostsMessage.textContent = 'There are no good kids. Add a good kid!';
                 output.appendChild(noPostsMessage);
                 return;
             }
@@ -27,6 +27,11 @@ function fetchKidsData() {
                         <input type="checkbox" class="bookCheck" style="margin-left: 10px;"> Book
                         <input type="checkbox" class="dollCheck" style="margin-left: 10px;"> Doll
                         <input type="checkbox" class="carCheck" style="margin-left: 10px;"> Car
+<<<<<<< HEAD:xmas-oef/fetchcrud.js
+                        <input type="checkbox" class="legoCheck" style="margin-left: 10px;"> Lego
+                        <input type="checkbox" class="psCheck" style="margin-left: 10px;"> Playstation
+=======
+>>>>>>> db4b6f2 (javascript werking):xmas-oef/fetchcrude.js
                         <button class="smallbutton" onclick="saveEdit('${kid.id}')" style="margin-left: 20px;">Save</button>
                         <button class="smallbutton" onclick="cancelEdit('${kid.id}')">Cancel</button>
                     </div>
@@ -56,7 +61,10 @@ document.getElementById('addPostButton').addEventListener('click', () => {
         },
         body: JSON.stringify(newPost)
     })
-    .then(() => fetchKidsData())
+    .then(() => {
+        fetchKidsData();
+        document.getElementById('kidName').value = '';
+    })
     .catch(e => console.error('Error adding post:', e))
 });
 
@@ -87,7 +95,13 @@ function editPost(id) {
             let giftsArray = [];
             let addBook = postDiv.querySelector('.bookCheck').checked ? giftsArray.push('Book') : null;
             let addDoll = postDiv.querySelector('.dollCheck').checked ? giftsArray.push('Doll') : null;
+<<<<<<< HEAD:xmas-oef/fetchcrud.js
+            let addCar = postDiv.querySelector('.carCheck').checked ? giftsArray.push('Toycar') : null;
+            let addLego = postDiv.querySelector('.legoCheck').checked ? giftsArray.push('Lego') : null;
+            let addPS = postDiv.querySelector('.psCheck').checked ? giftsArray.push('Playstation') : null;
+=======
             let addCar = postDiv.querySelector('.carCheck').checked ? giftsArray.push('Car') : null;
+>>>>>>> db4b6f2 (javascript werking):xmas-oef/fetchcrude.js
 
             // Create updated post object
             const updatedPost = {
@@ -135,8 +149,10 @@ function saveToLocal(postId, postName, postGifts, timestamp) {
             savedPosts.push(post);
             localStorage.setItem('savedPosts', JSON.stringify(savedPosts));
             loadSavedPosts();
+            deletePost(post.id);
+            fetchKidsData();
         } else {
-            alert('This post is already saved!');
+            alert("This child's gifts are already saved!");
         }
     } catch (error) {
         console.error('Error saving post:', error);
@@ -161,7 +177,7 @@ function loadSavedPosts() {
         if (savedPosts.length === 0) {
             const noPostsMessage = document.createElement('div');
             noPostsMessage.className = 'no-posts-message';
-            noPostsMessage.textContent = 'No saved posts yet!';
+            noPostsMessage.textContent = 'No saved gifts yet!';
             savedOutput.appendChild(noPostsMessage);
             return;
         }
@@ -173,7 +189,9 @@ function loadSavedPosts() {
             postDiv.className = 'post-item';
             postDiv.innerHTML = `
                 <span>${post.name} - Gifts: ${post.gifts}</span>
-                <button onclick="removeFromSaved('${post.id}')">Remove</button>
+                <div class="button-group">
+                    <button onclick="removeFromSaved('${post.id}')">Remove</button>
+                </div>
             `;
             savedOutput.appendChild(postDiv);
         });
@@ -197,6 +215,33 @@ function removeFromSaved(postId) {
     }
 }
 
+function fetchGiftsData() {
+    output2.innerHTML = '';
+    fetch(giftsUrl)
+        .then(res => res.json())
+        .then(giftsData => {
+            if (giftsData.length === 0) {
+                const noPostsMessage = document.createElement('div');
+                noPostsMessage.className = 'no-posts-message';
+                noPostsMessage.textContent = 'No gifts available. Add your first post!';
+                output.appendChild(noPostsMessage);
+                return;
+            }
+        
+        // Sort kids by timestamp in descending order
+        const sortedKids = giftsData.sort((a, b) => b.timestamp - a.timestamp);
+        sortedKids.forEach(gifts => {
+            output2.innerHTML += `
+                <div class="post-item" id="post-${gifts.id}">
+                    <span class="post-content">${gifts.name} </span>
+                </div>
+            `;
+        });
+    }) 
+    .catch(e => console.error('Error fetching posts:', e));
+}
+
 // Initial load
 fetchKidsData();
 loadSavedPosts();
+fetchGiftsData();
