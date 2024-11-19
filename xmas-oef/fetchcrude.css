@@ -45,7 +45,7 @@ h1 {
 
 input {
     flex: 1;
-    min-width: 200px;
+    min-width: 600px;
     padding: 12px 20px;
     border: none;
     background: rgba(255, 255, 255, 0.1);
