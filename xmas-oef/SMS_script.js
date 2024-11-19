@@ -11,7 +11,7 @@ function fetchKidsData() {
             if (kidsData.length === 0) {
                 const noPostsMessage = document.createElement('div');
                 noPostsMessage.className = 'no-posts-message';
-                noPostsMessage.textContent = 'No posts available. Add your first post!';
+                noPostsMessage.textContent = 'There are no good kids. Add a good kid!';
                 output.appendChild(noPostsMessage);
                 return;
             }
@@ -140,7 +140,7 @@ function saveToLocal(postId, postName, postGifts, timestamp) {
             localStorage.setItem('savedPosts', JSON.stringify(savedPosts));
             loadSavedPosts();
         } else {
-            alert('This post is already saved!');
+            alert("This child's gifts are already saved!");
         }
     } catch (error) {
         console.error('Error saving post:', error);
@@ -165,7 +165,7 @@ function loadSavedPosts() {
         if (savedPosts.length === 0) {
             const noPostsMessage = document.createElement('div');
             noPostsMessage.className = 'no-posts-message';
-            noPostsMessage.textContent = 'No saved posts yet!';
+            noPostsMessage.textContent = 'No saved gifts yet!';
             savedOutput.appendChild(noPostsMessage);
             return;
         }
@@ -209,7 +209,7 @@ function fetchGiftsData() {
             if (giftsData.length === 0) {
                 const noPostsMessage = document.createElement('div');
                 noPostsMessage.className = 'no-posts-message';
-                noPostsMessage.textContent = 'No posts available. Add your first post!';
+                noPostsMessage.textContent = 'No gifts available. Add your first post!';
                 output.appendChild(noPostsMessage);
                 return;
             }

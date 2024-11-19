@@ -1,42 +1,5 @@
 {
-  "kids": [
-    {
-      "id": "2d22",
-      "name": "Joren V",
-      "timestamp": 1731672177452,
-      "gifts": [
-        "Book",
-        "Toycar",
-        "Lego",
-        "Playstation"
-      ]
-    },
-    {
-      "id": "a6e4",
-      "name": "Zoe",
-      "gifts": [
-        "Doll"
-      ],
-      "timestamp": 1732006290626
-    },
-    {
-      "id": "1da5",
-      "name": "Jordy",
-      "gifts": [
-        "Book",
-        "Car"
-      ],
-      "timestamp": 1732007764968
-    },
-    {
-      "id": "5800",
-      "name": "Baziel",
-      "gifts": [
-        "Lego"
-      ],
-      "timestamp": 1732008868724
-    }
-  ],
+  "kids": [],
   "gifts": [
     {
       "id": "1",
