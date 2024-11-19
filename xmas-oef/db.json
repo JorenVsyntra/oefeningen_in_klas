@@ -7,27 +7,13 @@
       "gifts": []
     },
     {
-      "name": "Jordy H",
+      "id": "a6e4",
+      "name": "Zoe",
       "gifts": [
-        "3"
+        "Book",
+        "Car"
       ],
-      "timestamp": 1731915637045,
-      "id": "2fc1"
-    },
-
-    {
-      "name": "Rafa",
-      "gifts": [
-        "2"
-      ],
-      "timestamp": 1731681230701,
-      "id": "4664"
-    },
-    {
-      "id": "af9b",
-      "name": "Charles",
-      "gifts": [],
-      "timestamp": 1731969530098
+      "timestamp": 1732006290626
     }
   ],
   "gifts": [

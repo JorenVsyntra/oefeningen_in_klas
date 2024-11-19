@@ -24,15 +24,15 @@ function fetchKidsData() {
                     <span class="post-content">${kid.name} - Gifts: ${kid.gifts} </span>
                     <div class="edit-form" style="display: none;">
                         <span>${kid.name}</span>
-                        <input type="checkbox" class="bookCheck"> Book
-                        <input type="checkbox" class="dollCheck"> Doll
-                        <input type="checkbox" class="carCheck"> Car
-                        <button class="smallbutton" onclick="saveEdit('${kid.id}')">Save</button>
+                        <input type="checkbox" class="bookCheck" style="margin-left: 10px;"> Book
+                        <input type="checkbox" class="dollCheck" style="margin-left: 10px;"> Doll
+                        <input type="checkbox" class="carCheck" style="margin-left: 10px;"> Car
+                        <button class="smallbutton" onclick="saveEdit('${kid.id}')" style="margin-left: 20px;">Save</button>
                         <button class="smallbutton" onclick="cancelEdit('${kid.id}')">Cancel</button>
                     </div>
                     <div class="button-group">
                         <button onclick="editPost('${kid.id}')">Edit</button>
-                        <button onclick="saveToLocal('${kid.id}', '${kid.name}')">Save</button>
+                        <button onclick="saveToLocal('${kid.id}', '${kid.name}', '${kid.gifts}')">Save</button>
                         <button onclick="deletePost('${kid.id}')">Delete</button>
                     </div>
                 </div>
@@ -85,9 +85,9 @@ function editPost(id) {
             // Get the edited values
             const postDiv = document.getElementById(`post-${id}`);
             let giftsArray = [];
-            let addBook = postDiv.querySelector('.bookCheck').value ? giftsArray.push('Book') : null;
-            let addDoll = postDiv.querySelector('.dollCheck').value ? giftsArray.push('Doll') : null;
-            let addCar = postDiv.querySelector('.carCheck').value ? giftsArray.push('Car') : null;
+            let addBook = postDiv.querySelector('.bookCheck').checked ? giftsArray.push('Book') : null;
+            let addDoll = postDiv.querySelector('.dollCheck').checked ? giftsArray.push('Doll') : null;
+            let addCar = postDiv.querySelector('.carCheck').checked ? giftsArray.push('Car') : null;
 
             // Create updated post object
             const updatedPost = {
@@ -120,12 +120,12 @@ function editPost(id) {
         }
 
 // Save post to localStorage
-function saveToLocal(postId, postName, PostGifts, timestamp) {
+function saveToLocal(postId, postName, postGifts, timestamp) {
     try {
         const post = {
             id: postId,  // postId is received as a string
             name: postName,
-            gifts: PostGifts,
+            gifts: postGifts,
             timestamp: timestamp
         };
         
