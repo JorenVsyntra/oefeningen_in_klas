@@ -1,0 +1,33 @@
+1. Describe the differences between using map and filter. Why did you choose to use map for transforming the data and filter for creating gender-specific arrays?
+
+1.1 Describe the differences between using map and filter. 
+
+map:
+Purpose: Transformeert elk element van een array naar een nieuwe waarde en retourneert een nieuwe array met hetzelfde aantal elementen.
+Use case: Gebruik map wanneer je de data wilt transformeren of herschikken zonder het aantal elementen in de array te veranderen.
+
+filter:
+Purpose: Retourneert een nieuwe array die alleen de elementen bevat die aan een bepaalde voorwaarde voldoen (dwz: het "filtert" de data).
+Use case: Gebruik filter wanneer je een subset van de originele array wilt maken op basis van specifieke criteria (bv: het selecteren van gebruikers op basis van geslacht).
+
+
+1.2 Why did you choose to use map for transforming the data and filter for creating gender-specific arrays?
+
+- `map` voor transformeren: Het wordt gebruikt om elk element te herstructureren zonder het aantal elementen te veranderen. Het verwerkt alle elementen en past ze aan, wat ideaal is voor data-transformatie.
+- `filter` voor gender-specifieke arrays: Het selecteert alleen de elementen die aan een bepaalde voorwaarde voldoen (bijv. `gender === 'female'`). Het maakt een subset van de array, wat perfect is voor het filteren op geslacht.
+
+2. In the context of ES6 features, what benefits did you gain from using arrow functions, destructuring, and other ES6 syntax? Explain how it improved the clarity or functionality of your code.
+
+2.1 Benefits of Using ES6 Features:
+
+- Arrow Functions: Bondt `this` automatisch en heeft een beknopte syntaxis, wat contextproblemen in callbacks vermindert.
+- Destructuring: Vereenvoudigt de toegang tot objecteigenschappen en maakt de code schoner en minder repetitief.
+- Template Literals: Maakt stringvervanging eenvoudiger, zonder `+` voor concatenatie, wat de leesbaarheid verbetert.
+- Default Parameters: Voorkomt fouten door ontbrekende argumenten met standaardwaarden.
+
+2.2 How ES6 Improves Code:
+
+- Leesbaarheid: Arrow functions en destructuring verminderen overbodige code.
+
+- Veiliger en moderner: Default parameters zorgen voor betere foutafhandeling, en de ES6-syntaxis is gemakkelijker te begrijpen en te onderhouden.
+
