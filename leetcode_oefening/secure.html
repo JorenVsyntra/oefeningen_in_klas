@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santa's Workshop - Secure Area</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="Auth.checkAuth()">
+    <div class="snow"></div>
+    <div class="container py-5">
+        <div class="glass-container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="christmas-title">🎄 Santa's Secret Workshop</h1>
+                <button onclick="Auth.logout()" class="btn btn-christmas">Logout</button>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="glass-container h-100">
+                        <h3 class="christmas-title mb-4">📝 Nice List Status</h3>
+                        <div class="text-white">
+                            <p>Welcome to the secret workshop area!</p>
+                            <p>Your email: <span id="userEmail"></span></p>
+                            <p>Status: <span class="badge bg-success">Extra Nice</span></p>
+                            <p>Gifts Approved: 12</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="glass-container h-100">
+                        <h3 class="christmas-title mb-4">🎁 Your Wish List</h3>
+                        <ul class="wish-list">
+                            <li class="wish-item">PlayStation 5</li>
+                            <li class="wish-item">LEGO Star Wars Set</li>
+                            <li class="wish-item">New Bike</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass-container mt-4">
+                <h3 class="christmas-title mb-4">🧝‍♂️ Workshop Updates</h3>
+                <div class="text-white">
+                    <p>Toy Production: 85% Complete</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 85%" 
+                             aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p>Elves on Duty: 1,247</p>
+                    <p>Days Until Christmas: <span id="countdown">--</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Display user email
+        document.getElementById('userEmail').textContent = sessionStorage.getItem('userEmail');
+
+        // Calculate days until Christmas
+        function updateChristmasCountdown() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            const christmas = new Date(currentYear, 11, 25); // Month is 0-based
+            
+            if (now > christmas) {
+                christmas.setFullYear(currentYear + 1);
+            }
+            
+            const diffTime = christmas - now;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('countdown').textContent = diffDays;
+        }
+
+        updateChristmasCountdown();
+        setInterval(updateChristmasCountdown, 1000 * 60 * 60); // Update every hour
+        // This line calls updateChristmasCountdown() every hour (1000 ms * 60 sec * 60 min) to keep the countdown accurate throughout the day.
+
+    // 1.	Get Current Date:
+	// •	const now = new Date(); gets the current date and time.
+	// 2.	Set Christmas Date:
+	// •	const christmas = new Date(currentYear, 11, 25); creates a Date object for December 25th of the current year (months are zero-based, so 11 represents December).
+	// 3.	Check if Christmas Has Passed:
+	// •	if (now > christmas) checks if today’s date is after December 25th. If true, it updates christmas to the following year’s December 25th using christmas.setFullYear(currentYear + 1);.
+	// 4.	Calculate the Difference:
+	// •	const diffTime = christmas - now; calculates the difference in milliseconds.
+	// •	const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); converts the difference to days (1000 ms * 60 s * 60 min * 24 hours).
+	// 5.	Update Countdown:
+	// •	document.getElementById('countdown').textContent = diffDays; updates the HTML element with the calculated number of days.
+    </script>
+</body>
+</html>

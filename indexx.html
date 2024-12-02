@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stepline Chart - Computing Power</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f9;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .chart-container {
+      width: 80%;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Top 10 Countries by Computing Power</h1>
+  <div class="chart-container">
+    <canvas id="steplineChart"></canvas>
+  </div>
+
+  <script>
+    // Data for the chart
+    const countries = [
+      "🇺🇸 US",
+      "🇯🇵 Japan",
+      "🇮🇹 Italy",
+      "🇨🇭 Switzerland",
+      "🇩🇪 Germany",
+      "🇫🇮 Finland",
+      "🇨🇳 China",
+      "🇫🇷 France",
+      "🇪🇸 Spain",
+      "🇰🇷 S. Korea"
+    ];
+
+    const computingPower = [
+      6475559, // US
+      940710,  // Japan
+      837788,  // Italy
+      473517,  // Switzerland
+      405341,  // Germany
+      391388,  // Finland
+      319062,  // China
+      298086,  // France
+      221873   // Spain
+    ];
+
+    // Configuration for the stepline chart
+    const ctx = document.getElementById('steplineChart').getContext('2d');
+    const steplineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: countries,
+        datasets: [{
+          label: 'Computing Power (in TFlops)',
+          data: computingPower,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 2,
+          fill: true, // Fill under the line
+          tension: 0, // No curve (mimic stepline behavior)
+          stepped: true // Stepped line behavior
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(tooltipItem) {
+                return `Computing Power: ${tooltipItem.raw.toLocaleString()}`;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Computing Power (TFlops)'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Countries'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top 10 Countries Computing Power</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f9;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .chart-container {
+      width: 80%;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Top 10 Countries by Computing Power</h1>
+  <div class="chart-container">
+    <canvas id="computingPowerChart"></canvas>
+  </div>
+
+  <script>
+    // Data for the chart
+    const countries = [
+      "🇺🇸 US",
+      "🇯🇵 Japan",
+      "🇮🇹 Italy",
+      "🇨🇭 Switzerland",
+      "🇩🇪 Germany",
+      "🇫🇮 Finland",
+      "🇨🇳 China",
+      "🇫🇷 France",
+      "🇪🇸 Spain",
+      "🇰🇷 S. Korea"
+    ];
+
+    const computingPower = [
+      6475559, // US
+      940710,  // Japan
+      837788,  // Italy
+      473517,  // Switzerland
+      405341,  // Germany
+      391388,  // Finland
+      319062,  // China
+      298086,  // France
+      221873,  // Spain
+      213091   // S. Korea
+    ];
+
+    
+    // Chart.js configuration
+    const ctx = document.getElementById('computingPowerChart').getContext('2d');
+    const computingPowerChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: countries,
+        datasets: [{
+          label: 'Computing Power (in TFlops)',
+          data: computingPower,
+          backgroundColor: [
+            'rgba(75, 192, 192, 0.6)', // Color for US
+            'rgba(54, 162, 235, 0.6)', // Color for Japan
+            'rgba(255, 206, 86, 0.6)', // Color for Italy
+            'rgba(153, 102, 255, 0.6)', // Color for Switzerland
+            'rgba(255, 99, 132, 0.6)', // Color for Germany
+            'rgba(255, 159, 64, 0.6)', // Color for Finland
+            'rgba(199, 199, 199, 0.6)', // Color for China
+            'rgba(102, 255, 153, 0.6)', // Color for France
+            'rgba(255, 102, 204, 0.6)', // Color for Spain
+            'rgba(102, 204, 255, 0.6)', // Color for S. Korea
+          ],
+          borderColor: [
+            'rgba(75, 192, 192, 1)', 
+            'rgba(54, 162, 235, 1)', 
+            'rgba(255, 206, 86, 1)', 
+            'rgba(153, 102, 255, 1)', 
+            'rgba(255, 99, 132, 1)', 
+            'rgba(255, 159, 64, 1)', 
+            'rgba(199, 199, 199, 1)', 
+            'rgba(102, 255, 153, 1)', 
+            'rgba(255, 102, 204, 1)', 
+            'rgba(102, 204, 255, 1)',
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(tooltipItem) {
+                return `Computing Power: ${tooltipItem.raw.toLocaleString()} TFlops`;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Computing Power (TFlops)'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Countries'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
