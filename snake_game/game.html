@@ -2,22 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
-  <style>
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
-  body {
-    background: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  canvas {
-    border: 1px solid white;
-  }
-  </style>
+  <meta charset="utf-8">  
+  <title>Snake Game</title>
+  <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 <canvas width="600" height="600" id="game"></canvas>
@@ -144,6 +132,30 @@ document.addEventListener('keydown', function(e) {
     snake.dx = 0;
   }
 });
+  // dont let snake move outside of canvas
+  if (snake.x < 0 || snake.x > canvas.width - grid || snake.y < 0 || snake.y > canvas.height - grid) {
+    alert('Game Over');
+    snake.x = 160;
+    snake.y = 160;
+    snake.cells = [];
+    snake.maxCells = 4;
+    snake.dx = grid;
+    snake.dy = 0;
+    apple.x = getRandomInt(0, 25) * grid;
+    apple.y = getRandomInt(0, 25) * grid;
+  }
+  // game over if snake hits wall
+  if (snake.x < 0 || snake.x >= canvas.width || snake.y < 0 || snake.y >= canvas.height) {
+    alert('Game Over');
+    snake.x = 160;
+    snake.y = 160;
+    snake.cells = [];
+    snake.maxCells = 4;
+    snake.dx = grid;
+    snake.dy = 0;
+    apple.x = getRandomInt(0, 25) * grid;
+    apple.y = getRandomInt(0, 25) * grid;
+  }
 // start the game
 requestAnimationFrame(loop);
 </script>
