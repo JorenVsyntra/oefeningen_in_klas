@@ -1,0 +1,72 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com",
+      "phone": "555-1234",
+      "website": "alicejohnson.com",
+      "company": {
+        "name": "Johnson Innovations",
+        "catchPhrase": "Empowering innovation"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Bob Smith",
+      "email": "bob.smith@example.com",
+      "phone": "555-5678",
+      "website": "bobsmith.me",
+      "company": {
+        "name": "Smith Enterprises",
+        "catchPhrase": "Quality you can trust"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Charlie Brown",
+      "email": "charlie.brown@example.com",
+      "phone": "555-9876",
+      "website": "charliebrown.org",
+      "company": {
+        "name": "Brown Solutions"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Diana Prince",
+      "email": "diana.prince@example.com",
+      "website": "dianaprince.dev",
+      "company": {
+        "name": "Prince Innovations",
+        "catchPhrase": "Turning ideas into reality"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Elliot Alderson",
+      "email": "elliot.alderson@example.com",
+      "phone": "555-0000",
+      "company": {
+        "name": "Allsafe Cybersecurity",
+        "catchPhrase": "Protecting your digital world"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Fiona Gallagher",
+      "email": "fiona.gallagher@example.com",
+      "phone": "555-7654",
+      "website": "fionagallagher.net"
+    },
+    {
+      "id": 7,
+      "name": "George Bailey",
+      "email": "george.bailey@example.com",
+      "company": {
+        "name": "Bailey Brothers",
+        "catchPhrase": "Building a better future"
+      }
+    }
+  ]
+}

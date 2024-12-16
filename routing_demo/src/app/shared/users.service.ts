@@ -21,3 +21,31 @@ export class UsersService {
    }
    
 }
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  phone?: string;
+  website?: string;
+  company?: {
+    name: string;
+    catchPhrase?: string;
+  };
+}
+
+export class UserService {
+  private baseURL: string = "http://localhost:3000/users";
+
+  // Fetch a single user by ID
+  async getUserById(id: number): Promise<User | null> {
+    try {
+      const response = await fetch(`${this.baseURL}/${id}`);
+      if (!response.ok) throw new Error(`Failed to fetch user with ID ${id}`);
+      const user: User = await response.json();
+      return user;
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      return null;
+    }
+  }
+}

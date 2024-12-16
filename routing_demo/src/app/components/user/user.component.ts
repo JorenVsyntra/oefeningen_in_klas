@@ -28,3 +28,35 @@ export class UserComponent implements OnInit, OnDestroy {
     }
   }
 }
+import { UserService, User } from './userService';
+
+export class UserComponent {
+  private userService = new UserService();
+  public user: User | null = null;
+
+  constructor(private userId: number) {}
+
+  async loadUser() {
+    this.user = await this.userService.getUserById(this.userId);
+    this.displayUser();
+  }
+
+  displayUser() {
+    if (this.user) {
+      console.log("User Details:");
+      console.log(`Name: ${this.user.name}`);
+      console.log(`Email: ${this.user.email}`);
+      console.log(`Phone: ${this.user.phone || "N/A"}`);
+      console.log(`Website: ${this.user.website || "N/A"}`);
+      console.log(
+        `Company: ${this.user.company?.name || "N/A"} - ${this.user.company?.catchPhrase || ""}`
+      );
+    } else {
+      console.log("User not found!");
+    }
+  }
+}
+
+// Example usage
+const userComponent = new UserComponent(1); // Fetch user with ID 1
+userComponent.loadUser();
