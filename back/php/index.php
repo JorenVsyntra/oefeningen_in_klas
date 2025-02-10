@@ -1,14 +1,21 @@
+
 <?php
-// Create 5 variables with different string values
-$name = "John";
-$city = "New York";
-$job = "software engineer";
-$hobby = "chess";
-$age = "35";
+// basic php code to show the world hello world
+echo "hello world";
+echo "<b>hello world</b>";
+// Capitals do matter!
+$hwSimple = "hello world";
+$hwsimple = "hello NO world";
+?>
 
-// Concatenate variables into a sentence and store in a final variable
-$fullSentence = $name . " is a " . $job . " living in " . $city . " who enjoys playing " . $hobby . " and is " . $age . " years old.";
+Back into html land...
 
-// Display the sentence
-echo $fullSentence;
+<?php 
+// back into php land
+echo "magic: $hwSimple";
+?>
+
+
+<?php
+
 ?>
